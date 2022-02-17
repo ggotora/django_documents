@@ -3,7 +3,8 @@
 To secure django project settings.py SECRET_KEY
 
 In  ``` settings.py  ```
-``` import os 
+``` 
+import os 
 from dotenv import load_dotenv
 from pathlib import Path
 
