@@ -32,3 +32,22 @@ if settings.DEBUG:
   <h3>Succesfully uploaded : {{img_obj.title}}</h3>
   <img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px">
 {% endif %}
+
+6. Views 
+from django.shortcuts import render
+from .forms import ImageForm
+
+
+def image_upload_view(request):
+    """Process images uploaded by users"""
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            # Get the current instance object to display in the template
+            img_obj = form.instance
+            return render(request, 'index.html', {'form': form, 'img_obj': img_obj})
+    else:
+        form = ImageForm()
+    return render(request, 'index.html', {'form': form})
+
