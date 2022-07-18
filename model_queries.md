@@ -44,9 +44,7 @@ class Character(models.Model):
         return self.name 
    
   ```
-  #### Quries 
-  ```
-  
+  #### Create and add Many To Many
   ```
   avengers = Movie(name="Avengers")
   avengers.save()
@@ -58,11 +56,20 @@ class Character(models.Model):
   gilbert = Character(name="Gilbert")
   gilbert.save()
   gilbert.movies.add(avengers)
+  
+  ## 
  
   # update 
    gilbert.name = "Captain Gile"
    gilbert.save()
    alice = Character(name="Alice")
    alice.movies.create(name="Alice in Wonderland")
+   ```
+  #### Query Many To Many
+  
+  ```
+  characters_in_avengers = Character.objects.filter(movies__name="Avengers")
+  gilbert_movies =  Movie.objects.filter(character__name="Gilbert")
+  movie_tuple = Movie.objects.values_list("id", "name")
   ```
   
